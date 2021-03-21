@@ -1,6 +1,6 @@
 /*!
  * 
- * nehan-player 0.0.1
+ * nehan-player 0.0.2
  * License: MIT
  * Copyright (c) 2021, Watanabe Masaki
  *
