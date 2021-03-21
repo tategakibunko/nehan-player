@@ -195,6 +195,7 @@ export function getPlayerStyle(writingMode: WritingMode, playerSize: PhysicalSiz
     width: ${playerSize.width}px;
     height: ${playerSize.height}px;
     padding: ${layoutSettings.elementPaddingTop}px ${lrPadding}px ${bottomPadding}px;
+    background: wheat;
     border-width: ${borderSize}px ${borderSize}px 0 ${borderSize}px;
   }
   #menu {

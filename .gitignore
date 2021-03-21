@@ -1,4 +1,5 @@
 .DS_Store
+docs/doc-demo.js
 example/*.js
 example/fonts
 node_modules
