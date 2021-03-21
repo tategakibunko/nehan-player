@@ -3,7 +3,5 @@ docs/doc-demo.js
 example/*.js
 example/fonts
 node_modules
-dist/index.*
-dist/player.*
 *.code-workspace
 

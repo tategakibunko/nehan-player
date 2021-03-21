@@ -1,0 +1,30 @@
+import { PhysicalSize, WritingMode } from 'nehan';
+export declare type ScreenLayout = "1x1" | "1x2" | "2x1" | "2x2";
+export declare type PlayerWritingMode = "horizontal-tb" | "vertical-rl" | "vertical-lr";
+interface LayoutSettings {
+    readonly defaultLayout: ScreenLayout;
+    readonly pageGapSize: number;
+    readonly minFontSize: number;
+    readonly maxFontSize: number;
+    readonly minWidth: number;
+    readonly minHeight: number;
+    readonly minMultiColWidth: number;
+    readonly minMultiRowHeight: number;
+    readonly maxBorderSize: number;
+    readonly elementPaddingTop: number;
+}
+export declare const layoutSettings: LayoutSettings;
+export declare function getScreenPageCount(layout: ScreenLayout): number;
+export declare function getPageOrder(layout: ScreenLayout, writingMode: WritingMode): number[];
+export declare function isMultiCol(layout: ScreenLayout): boolean;
+export declare function isMultiRow(layout: ScreenLayout): boolean;
+export declare function decGridCol(layout: ScreenLayout): ScreenLayout;
+export declare function decGridRow(layout: ScreenLayout): ScreenLayout;
+export declare function getElementLrPaddingSize(writingMode: WritingMode, layout: ScreenLayout, elementSize: PhysicalSize, fontSize: number, lineHeight: number, borderSize: number): number;
+export declare function getElementBottomPaddingSize(writingMode: WritingMode, layout: ScreenLayout, elementSize: PhysicalSize, fontSize: number, lineHeight: number, borderSize: number): number;
+export declare function getPlayerSize(elementSize: PhysicalSize, fontSize: number, lrPadding: number, bottomPadding: number, borderSize: number): PhysicalSize;
+export declare function getPageSize(layout: ScreenLayout, playerSize: PhysicalSize): PhysicalSize;
+export declare function getPlayerHTML(): string;
+export declare function getPlayerStyle(writingMode: WritingMode, playerSize: PhysicalSize, fontSize: number, lrPadding: number, bottomPadding: number, borderSize: number): string;
+export declare function getGridStyle(layout: ScreenLayout, playerSize: PhysicalSize): string;
+export {};
