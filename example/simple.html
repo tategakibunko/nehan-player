@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>simple player demo</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width">
+</head>
+
+<body style="margin:1em">
+  <main>
+    <nehan-player src="test-data/aozora02.txt" writing-mode="horizontal-tb" width="responsive" height="500"
+      font-size="16" layout="1x2">
+      <span slot="title">雪解（永井荷風）</span>
+    </nehan-player>
+    <!-- <h1>horizontal-tb(1x2)</h1>
+    <nehan-player src="test-data/alice-en.html" writing-mode="horizontal-tb" width="800" height="500" font-size="16"
+      layout="1x2">
+      <span slot="title">ふしぎの国のアリス</span>
+      <span slot="footer">This is footer text</span>
+    </nehan-player>
+
+    <h1>vertical-rl(1x2)</h1>
+    <nehan-player src="test-data/aozora01.txt" writing-mode="vertical-rl" width="800" height="500" font-size="16"
+      layout="1x2">
+      <span slot="title">杜子春（芥川龍之介）</span>
+    </nehan-player>
+
+    <h1>vertical-rl(2x1)</h1>
+    <nehan-player src="test-data/aozora01.txt" writing-mode="vertical-rl" width="800" height="500" font-size="16"
+      layout="2x1">
+      <span slot="title">杜子春（芥川龍之介）</span>
+    </nehan-player>
+
+    <h1>horizontal-tb(1x1)</h1>
+    <nehan-player src="test-data/aozora02.txt" writing-mode="horizontal-tb" width="800" height="500" font-size="16"
+      layout="1x1">
+      <span slot="title">雪解（永井荷風）</span>
+    </nehan-player>
+
+    <h1>vertical-rl(2x2)</h1>
+    <nehan-player src="test-data/aozora01.txt" writing-mode="vertical-rl" width="800" height="500" font-size="16"
+      layout="2x2">
+      <span slot="title">杜子春（芥川龍之介）</span>
+    </nehan-player>
+
+    <h1>using 'content' slot</h1>
+    <nehan-player writing-mode="horizontal-tb" width="800" height="500" font-size="16" layout="1x2">
+      <span slot="title">直接テキストを埋め込むサンプル</span>
+      <span slot="footer">ここにコピーライトなどを書くと良いかも</span>
+      <div slot="content">
+        <p>src属性を宣言せず、slot="content"を利用して、直接テキストを埋め込むことができます。</p>
+      </div>
+    </nehan-player> -->
+  </main>
+
+  <script src="./nehan-player.js"></script>
+  <script>
+    let players = {};
+    NehanPlayer.initialize({
+      cssFiles: ["themes/default.css"],
+      onPlayerReady(player) {
+        players[player.id] = player;
+      },
+      onFetchContent(src, content) {
+        if (src.endsWith(".txt")) {
+          return content.replace(/^\n+/, "").replace(/\n/g, "<br>");
+        }
+        return content;
+      },
+      onClickLeftPage(player) {
+        player.gotoLeftPage();
+      },
+      onClickRightPage(player) {
+        player.gotoRightPage();
+      }
+    });
+  </script>
+</body>
+
+</html>

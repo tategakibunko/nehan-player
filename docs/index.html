@@ -1,0 +1,688 @@
+<!doctype html>
+<html lang="ja" dir="ltr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width">
+  <title>nehan-player</title>
+  <link rel="shortcut icon" type="image/png" href="favicon.png" />
+  <!-- highlight.js theme -->
+  <link rel="stylesheet" href="srcery.css">
+  <!-- 
+    These css files are used in shadow DOM,
+    so normally we should load them in shadow DOM.
+    But in current status, @font-face can't be imported into shadow DOM.
+    https://bugs.chromium.org/p/chromium/issues/detail?id=336876
+    So we declared these files here.
+    -->
+  <link rel="stylesheet" href="font.css">
+
+  <style>
+    main {
+      margin: 1.5em;
+    }
+
+    @media screen and (min-width: 780px) {
+      main {
+        width: 740px;
+        margin: 0 auto;
+      }
+    }
+
+    h2 {
+      border-left: 6px solid rgb(231, 92, 115);
+      padding: 0.8em 0.6em;
+    }
+
+    h3 {
+      border-bottom: 1px solid #d8d8d8;
+      padding-bottom: 0.2em;
+    }
+
+    .profile-line svg {
+      vertical-align: middle;
+    }
+
+    .profile-line a {
+      margin-right: 0.5em;
+    }
+
+    table {
+      border: 1px solid #888;
+      border-collapse: collapse;
+      margin-bottom: 2em;
+    }
+
+    tr,
+    td {
+      border: 1px solid #888;
+    }
+
+    td,
+    th {
+      text-align: left;
+      padding: 0.5em;
+    }
+
+    th {
+      background: #eee;
+    }
+
+    strong {
+      color: #d61111;
+    }
+
+    a,
+    a:visited {
+      color: #0059b2;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: #ba1000;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <h1>nehan-player</h1>
+
+    <p class="profile-line">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 182 150">
+        <g transform="matrix(1.3333 0 0 -1.3333 0 150.67) scale(.1)">
+          <path
+            d="m1366.9 989.39c-50.27-22.309-104.33-37.387-161.05-44.18 57.89 34.723 102.34 89.679 123.28 155.15-54.18-32.15-114.18-55.47-178.09-68.04-51.13 54.49-124.02 88.55-204.68 88.55-154.89 0-280.43-125.55-280.43-280.43 0-21.988 2.457-43.398 7.258-63.91-233.08 11.68-439.72 123.36-578.04 293.01-24.141-41.4-37.969-89.567-37.969-140.97 0-97.308 49.489-183.13 124.76-233.44-45.969 1.437-89.218 14.058-127.03 35.078-0.043-1.18-0.043-2.348-0.043-3.52 0-135.9 96.68-249.22 224.96-275-23.512-6.41-48.281-9.8-73.86-9.8-18.089 0-35.628 1.711-52.781 5 35.711-111.41 139.26-192.5 262-194.77-96.058-75.23-216.96-120.04-348.36-120.04-22.621 0-44.961 1.332-66.918 3.91 124.16-79.568 271.55-125.98 429.94-125.98 515.82 0 797.86 427.31 797.86 797.93 0 12.153-0.28 24.223-0.79 36.25 54.77 39.571 102.31 88.95 139.93 145.2"
+            fill="rgba(29,161,242,1.00)"></path>
+        </g>
+      </svg>
+      <a href="https://twitter.com/tategakibunko">twitter</a>
+
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="20" height="20">
+        <path fill-rule="evenodd"
+          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+        </path>
+      </svg>
+      <a href="https://github.com/tategakibunko/nehan-player">github</a>
+    </p>
+
+
+    <h2>About</h2>
+    <p><a href="https://github.com/tategakibunko/nehan-player">nehan-player</a> is fast, powerful, extensible
+      web-component player for paged-media powered by <a href="https://github.com/tategakibunko/nehan">nehan</a>
+      (dynamic and logical html layout engine).
+    </p>
+    <p>You can see <a href="#demo">Demo</a>.</p>
+
+    <h2>Quickstart</h2>
+    <pre><code class="lang-html">
+      &lt;nehan-player writing-mode="horizontal-tb" width="responsive" height="500" font-size="16" layout="1x2"&gt;
+          &lt;div slot="content"&gt;
+              &lt;h1&gt;Hello, nehan-player!&lt;/h1&gt;
+              &lt;p&gt;My first nehan-player experience!&lt;/p&gt;
+          &lt;/div&gt;
+      &lt;/nehan-player&gt;
+  
+      &lt;script src="https://cdn.jsdelivr.net/npm/nehan-player/dist/nehan-player.min.js"&gt;&lt;/script&gt;
+      &lt;script&gt;
+          NehanPlayer.initialize();// Activate with default settings(no options).
+      &lt;/script&gt;
+    </code></pre>
+
+
+    <h2>How to install</h2>
+    <h3>npm</h3>
+    <pre><code class="lang-bash">
+      npm i nehan-player
+    </code></pre>
+    <h3>cdn</h3>
+    <pre><code class="lang-html">
+      &lt;script src="https://cdn.jsdelivr.net/npm/nehan-player/dist/nehan-player.min.js"&gt;&lt;/script&gt;
+    </code></pre>
+
+    <h2>How to use</h2>
+
+    <h3>1. Markup HTML</h3>
+    <p>You can load text content by <strong>src</strong> attribute.</p>
+    <pre><code class="lang-typescript">
+      &lt;!-- use 'src' attribute --&gt;
+      &lt;nehan-player src="path/to/text.html" writing-mode="horizontal-tb" width="800"
+        height="500" font-size="16" layout="1x2"&gt;
+      &lt;/nehan-player&gt;
+    </code></pre>
+
+    <p>Or you can set text content by <strong>content</strong> slot.</p>
+    <pre><code class="lang-typescript">
+      &lt;!-- use 'content' slot --&gt;
+      &lt;nehan-player writing-mode="horizontal-tb" width="800" height="500"
+        font-size="16" layout="1x2"&gt;
+          &lt;div slot="content"&gt;Your content text is here&lt;/div&gt;
+      &lt;/nehan-player&gt;
+    </code></pre>
+
+    <h3>2. Activate nehan-player</h3>
+    <p>To activate nehan-player, you should call <strong>NehanPlayer.initialize</strong>.</p>
+
+    <h4>Typescript</h4>
+    <pre><code class="lang-typescript">
+      import { NehanPlayer } from 'nehan-player';
+
+      NehanPlayer.initialize(); // Activate with default settings(no options).
+    </code></pre>
+
+    <h4>Javascript</h4>
+    <pre><code class="lang-javascript">
+      require { NehanPlayer } from 'nehan-player';
+
+      NehanPlayer.initialize(); // Activate with default settings(no options).
+    </code></pre>
+
+    <p>Note that there are many option argument for <strong>initialize</strong> method. (See <a
+        href="#initialize">NehanPlayer.initialize options</a>)</p>
+
+    <h2>Markup options</h2>
+    <h3 id="attributes">Supported element attributes</h3>
+    <table>
+      <tr>
+        <th>src</th>
+        <td>
+          <p>Specify path for the target text file.</p>
+          <p>Note that you can also set text content by <strong>content</strong> slot(See <a href="#slot">Supported
+              slot</a>)</p>
+        </td>
+      </tr>
+      <tr>
+        <th>theme</th>
+        <td>
+          <p>Specify path for the theme css(e.g. 'themes/default.css')</p>
+        </td>
+      </tr>
+      <tr>
+        <th>writing-mode</th>
+        <td>
+          <p>Specify "writing-mode" value of paged media content.</p>
+          <p><strong>"horizontal-tb"</strong> or <strong>"vertical-rl"</strong> or <strong>"vertical-lr"</strong> are
+            available.</p>
+        </td>
+      </tr>
+      <tr>
+        <th>width</th>
+        <td>
+          <p>Specify player width.</p>
+          <p><strong>px</strong> size or <strong>"responsive"</strong> are available.</p>
+          <p>Note that min size of witdh is <strong>300</strong>px.</p>
+          <p>If <b>width</b> is <strong>"responsive"</strong>, player width automatically changes for each time the size
+            of parent elmement is changed.</p>
+        </td>
+      </tr>
+      <tr>
+        <th>height</th>
+        <td>
+          <p>Specify player height(px).</p>
+          <p>Height of menu and footer are not included in this height.</p>
+          <p>Note that min size of height is <strong>300</strong>px.</p>
+        </td>
+      </tr>
+      <tr>
+        <th>font-size</th>
+        <td>
+          <p>Specify document font size(px) for paged media content.</p>
+        </td>
+      </tr>
+      <tr>
+        <th>layout</th>
+        <td>
+          <p>Specify layout grid format.</p>
+          <p><strong>"1x1"</strong> or <strong>"1x2"</strong> or <strong>"2x1"</strong> or <strong>"2x2"</strong> are
+            available.</p>
+          <p>
+            To use multi-column format(1x2 or 2x2), at least <strong>600</strong>px of width is required.
+            If width is smaller than 600px, then single column format is used.
+          </p>
+          <p>
+            To use multi-row format(2x1 or 2x2), at least <strong>500</strong>px of height is required.
+            If height is smaller than 500px, then single row format is used.
+          </p>
+        </td>
+      </tr>
+    </table>
+
+    <h3 id="slot">Supported template slot</h3>
+
+    <h4>content slot</h4>
+    <p>You can use <strong>content</strong> slot to define player content.</p>
+    <p>Note that use can use <strong>src</strong> attribute for remote resource.</p>
+    <pre><code class="lang-html">
+      &lt;nehan-player&gt;
+          &lt;div slot="content"&gt;
+              &lt;h1&gt;This is my title!&lt;/h1&gt;
+              &lt;p&gt;This is my player content!!&lt;/p&gt;
+          &lt;/div&gt;
+      &lt;/nehan-player&gt;
+    </code></pre>
+
+    <h4>title slot</h4>
+    <p>You can set the title at the top-left corner of screen by <strong>title</strong> slot.</p>
+    <pre><code class="lang-html">
+          &lt;nehan-player src="path/to/text"&gt;
+              &lt;span slot="title"&gt;This is my great title&lt;/span&gt;
+          &lt;/nehan-player&gt;
+        </code></pre>
+
+    <h4>sub-title slot</h4>
+    <p>You can set the sub-title next to the title by <strong>sub-title</strong> slot.</p>
+    <pre><code class="lang-html">
+          &lt;nehan-player src="path/to/text"&gt;
+              &lt;span slot="title"&gt;This is my great title&lt;/span&gt;
+              &lt;span slot="sub-title"&gt; - chapter 1&lt;/span&gt;
+          &lt;/nehan-player&gt;
+        </code></pre>
+    <h4>button label slot</h4>
+    <p>You can change the label of next/prev button by using <strong>goto-left-label</strong> slot or <strong>
+        goto-right-label</strong> slot like this.</p>
+    <pre><code class="lang-html">
+      &lt;nehan-player src="path/to/text"&gt;
+          &lt;span slot="goto-left-label"&gt;goto left!!!&lt;/span&gt;
+          &lt;span slot="goto-right-label"&gt;goto right!!!&lt;/span&gt;
+      &lt;/nehan-player&gt;
+    </code></pre>
+
+    <h4>footer slot</h4>
+    <p>You can add footer text in the bottom-right corner of player by using <strong>footer</strong> slot.</p>
+    <pre><code class="lang-html">
+      &lt;nehan-player src="path/to/text"&gt;
+          &lt;span slot="footer"&gt;All rights reserved by &lt;a href="#"&gt;xxx&lt;/a&gt;&lt;/span&gt;
+      &lt;/nehan-player&gt;
+    </code></pre>
+
+    <h2 id="initialize">NehanPlayer.initialize options</h2>
+    <p>You can set extra settings or callbacks in optional arugment of <b>NehanPlayer.initialize.</b>
+    </p>
+
+    <h3>cssFiles</h3>
+    <p>Set css files for <strong>shadow DOM</strong> of nehan-player.</p>
+    <p>Apart from the <strong>theme</strong> attribute of the elemement, this field is used to load other external css
+      files.</p>
+    <p>Note that you can't put it in host html, because shadow DOM is not affected by host css.</p>
+    <pre><code class="lang-typescript">
+      // if we use nehan-katex, we should import css for katex.
+      NehanPlayer.initialize({
+        cssFiles: ["katex.css"]
+      });
+    </code></pre>
+
+    <h3>onCreateNehanStyles</h3>
+    <p>Unlike normal HTML content, the content layout of each page is calculated by <strong>logical </strong> layout
+      engine (nehan).</p>
+    <p>So if you need to add some style to page content, you should declare <strong>nehan style</strong>
+      (CssStyleSheet
+      declaration for nehan layout engine).</p>
+    <p>For more details of nehan style, see <a href="#nehan-style">About nehan style</a> section.</p>
+
+    <h3>onFetchContent</h3>
+    <p>Fired when the content of <b>src</b> attribute or <b>content</b> slot is fetched.</p>
+    <p>You can fix the content here for you own use.</p>
+    <pre><code class="lang-typescript">
+      NehanPlayer.initialize({
+        onFetchContent(src: string, content: string){
+          if (src.endsWith(".txt")) {
+            return content.replace(/^\n+/, "").replace(/\n/g, "&lt;br&gt;");
+          }
+          return content;
+        }
+      });
+    </code></pre>
+
+    <h3>onPlayerReady</h3>
+    <p>Fired when PagedMediaPlayer is ready to use.</p>
+    <pre><code class="lang-typescript">
+      NehanPlayer.initialize({
+        onPlayerReady(player: PagedMediaPlayer){
+          // console.log("player ready:", player);
+        }
+      });
+    </code></pre>
+
+    <h3>onParsePage</h3>
+    <p>Fired when each page is parsed.</p>
+    <pre><code class="lang-typescript">
+      NehanPlayer.initialize({
+        onParsePage(player: PagedMediaPlayer, pageIndex: numuber){
+          // console.log(`parsed page(${pageIndex})`);
+        }
+      });
+    </code></pre>
+
+    <h3>onParseComplete</h3>
+    <p>Fired when final page is parsed.</p>
+    <p>This is perfect timing to create outline(toc) element.</p>
+    <pre><code class="lang-typescript">
+      import { PlayerSection }  from 'nehan-player';
+
+      NehanPlayer.initialize({
+        onParseComplete(player: PagedMediaPlayer, pageCount: numuber, ellapsedTime: number){
+          // console.log(`finished! time = ${ellapsedTime / 1000}sec`);
+          const outline = player.createOutline((section: PlayerSection) => {
+            player.gotoPage(section.pageIndex);
+          });
+        }
+      });
+    </code></pre>
+
+    <h3>onSetPage</h3>
+    <p>Fired when user move the page and new page is set.</p>
+    <p>If you want some action for each paging, you can add some action here.</p>
+    <pre><code class="lang-typescript">
+      import { Page } from 'nehan';
+
+      NehanPlayer.initialize({
+        onSetPage(player: PagedMediaPlayer, page: Page){
+          // console.log("set page:", page);
+        }
+      });
+    </code></pre>
+
+    <h3>onClickLeftPage</h3>
+    <p>Fired when user click left side of the page.</p>
+    <pre><code class="lang-typescript">
+      NehanPlayer.initialize({
+        onClickLeftPage(player: PagedMediaPlayer){
+          player.gotoLeftPage();
+        }
+      });
+    </code></pre>
+
+    <h3>onClickRightPage</h3>
+    <p>Fired when user click right side of the page.</p>
+    <pre><code class="lang-typescript">
+      NehanPlayer.initialize({
+        onClickRightPage(player: PagedMediaPlayer){
+          player.gotoRightPage();
+        }
+      });
+    </code></pre>
+
+    <h2>PagedMediaPlayer interface</h2>
+    <h3>Properties</h3>
+    <h4>$host</h4>
+    <p>HTMLElement of &lt;nehan-player&gt;.</p>
+
+    <h4>id(readonly)</h4>
+    <p>id attribute value of &lt;nehan-player&gt; element.</p>
+
+    <h4>src(readonly)</h4>
+    <p>src attribute value of &lt;nehan-player&gt; element.</p>
+
+    <h4>content(readonly)</h4>
+    <p>Content string of player.</p>
+
+    <h4>currentSection(readonly)</h4>
+    <p>Current section data.</p>
+
+    <h4>currentPageIndex</h4>
+    <p>Current page index that starts from zero.</p>
+    <p>You can set or get.</p>
+    <pre><code class="lang-typescript">
+      const index = player.currentPageIndex; // get
+      player.currentPageIndex = 0; // set(go to fist page)
+    </code></pre>
+
+    <h4>pageCount</h4>
+    <p>Total page count of document.</p>
+
+    <h4>width(readonly)</h4>
+    <p>Player width size in px.</p>
+
+    <h4>height(readonly)</h4>
+    <p>Player height size in px.</p>
+
+    <h4>layout</h4>
+    <p>Grid layout of player.</p>
+    <p>Returns <strong>"1x1"</strong> or <strong>"1x2"</strong> or <strong>"2x1"</strong> or <strong>"2x2"</strong></p>
+
+    <h4>fontSize</h4>
+    <p>Base font-size used for paged-media content of player.</p>
+
+    <h4>writingMode</h4>
+    <p>writing-mode of this player.</p>
+    <p>Returns <strong>"horizontal-tb"</strong> or <strong>"vertical-rl"</strong> or <strong>"vertical-lr"</strong>.</p>
+
+    <pre><code class="lang-typescript">
+      const isVertical: boolean = player.writingMode.indexOf("vertical") >= 0;
+      const isRightToLeft: boolean = player.writingMode === "vertical-rl";
+    </code></pre>
+
+    <h3>Method</h3>
+    <h4>gotoPage(pageIndex: number)</h4>
+    <p>Move to page of pageIndex.</p>
+    <pre><code class="lang-typescript">
+      player.gotoPage(0); // goto first page
+      player.gotoPage(player.pageCount - 1); // goto last page
+    </code></pre>
+
+    <h4>gotoNextPage()</h4>
+    <p>Goto next page.</p>
+    <p>If LTR text, it's same as gotoRightPage().</p>
+    <p>If RTL text, it's same as gotoLeftPage().</p>
+
+    <h4>gotoPrevPage()</h4>
+    <p>Goto previous page.</p>
+    <p>If LTR text, it's same as gotoLeftPage().</p>
+    <p>If RTL text, it's same as gotoRightPage().</p>
+
+    <h4>gotoLeftPage()</h4>
+    <p>Goto left side of the page.</p>
+    <p>If LTR text, it's same as gotoPrevPage().</p>
+    <p>If RTL text, it's same as gotoNextPage().</p>
+
+    <h4>gotoRightPage()</h4>
+    <p>Goto right side of the page.</p>
+    <p>If LTR text, it's same as gotoNextPage().</p>
+    <p>If RTL text, it's same as gotoPrevPage().</p>
+
+    <h4>update(attributes)</h4>
+    <p>Update player attribute and refresh player layout if required.</p>
+    <p>About supported attributes, see <a href="#attributes">Supported attributes</a>.</p>
+    <pre><code class="lang-typescript">
+      player.update({ fontSize: 20 });
+      player.update({ writingMode: "vertical-rl" });
+      player.update({ width: "responsive", layout: "1x1" });
+      player.update({ width: "900", height: "500" });
+    </code></pre>
+
+    <h4 id="refresh">refresh(throttle: boolean)</h4>
+    <p>Unlike update method, <strong>refresh</strong> method forces make player updated (<b>update</b>
+      method is ignored if no change is detected).</p>
+    <p>If argument <strong>throttle</strong> is true, player prevents display from being updated too frequently.</p>
+
+    <h4>createOutline(onClickTocItem?)</h4>
+    <p>Create toc DOM tree.</p>
+    <p>Optional argument <strong>onClickTocItem</strong> is called when each toc item is clicked.</p>
+    <p>Note that if you call this method <b>BEFORE</b> <strong>onParseComplete</strong> callback, the toc tree will be
+      incomplete
+      one.</p>
+
+    <pre><code class="lang-typescript">
+      import { PlayerSection } from 'nehan-player';
+
+      NehanPlayer.initialize({
+        onParseComplete(player: PagedMediaPlayer, pageCount: number, time: number){
+          const $toc: HTMLElement = player.createOutline((section: PlayerSection) => player.gotoPage(section.pageIndex));
+        }
+      });
+    </code></pre>
+
+    <h4>setTitle(title: string)</h4>
+    <p>Set the top-left corner text.</p>
+
+    <h4>setSubTitle(title: string)</h4>
+    <p>Set the top-left corner sub-title text.</p>
+
+    <pre><code class="lang-typescript">
+      NehanPayer.initialize({
+        onSetPage(player: PagedMediaPlayer, page: Page) {
+          const section = player.currentSection;
+          if (!section.isRoot()) {
+            player.setSubTitle(`&amp;gt; ${section.title}`);
+          }
+        }
+      });
+    </code></pre>
+
+    <h2 id="nehan-style">About nehan style</h2>
+    <p>You can create <strong>nehan style</strong> to modify inside style of page content.</p>
+    <p>Remember that each content of page is not calculated by native browser, but logical layout engine (nehan).</p>
+    <p>So if you need to modify the style of page content, you should declare nehan styles!</p>
+
+    <h4>example1: back to top link</h4>
+    <p>This is a tiny example of nehan style. By clicking link like &lt;a href="<b>#top</b>"&gt;back to top&lt;/a&gt;,
+      we can
+      goto first page, and it's color is green.</p>
+
+    <pre><code class="lang-typescript">
+      import { CssStyleSheet, DomCallbackContext } from 'nehan';
+      import { PagedMediaPlayer } from 'nehan-player';
+
+      function createBackToTopStyle(player: PagedMediaPlayer){
+        return new CssStyleSheet({
+          "a[href='#top']": {
+            "color": "green",
+            "@create": (ctx: DomCallbackContext) => {
+              ctx.dom.onclick = (e) => {
+                e.preventDefault();
+                player.gotoPage(0);
+                return false;
+              }
+            }
+          }
+        });
+      }
+    </code></pre>
+
+    <p>And you may be confused, because there is some strange property name. What is
+      "<strong>@create</strong>"?
+    </p>
+    <p>In nehan-style, the property name that starts with "<strong>@</strong>" is called <strong>callback
+        style</strong>.</p>
+    <p><b>Each time</b> the DOM of target selector is created, callback syle is called.</p>
+    <p>But you may wonder the word "each time". Isn't the DOM of selector associated with one node only created once?
+    </p>
+    <p>No, it's not. Remember that nehan is "paged-media" layout engine, so one selector(for one node) can be
+      generated
+      into splited pages, and this callback function can be called multiple times for one node. So we use the word
+      "each
+      time".</p>
+
+    <p>Well, anyway, finally we got our first nehan style! Then we can set this style in
+      <strong>onCreateNehanStyles</strong>.
+    </p>
+    <p>And now you can use this "back to top" link anywhere in your page content.</p>
+
+    <pre><code class="lang-typescript">
+      NehanPlayer.initialize({
+        onCreateNehanStyles(player: PagedMediaPlayer){
+          return [
+            createBackToTopStyle(player), // our first nehan style!
+          ];
+        }
+      });
+    </code></pre>
+
+    <h4>example2: dynamic style</h4>
+    <p>Unlike normal css, nehan-style can dynamically <b>change</b> the css value according to parent layout status.
+    </p>
+    <p>The following is an example that dynamically creates <strong>page-break-before: always</strong> whether there
+      is
+      enough space left for the parent layout.</p>
+    <p>Note that in nehan, block size is expressed as <strong>extent</strong> (and inline size is expressed as
+      <strong>measure</strong>).
+    <p>And you may be confused again, because there is some strange property name once again. What is
+      <strong>"!dynamic"</strong>?
+    </p>
+    <p>In nehan-style, the property name that starts with "<strong>!</strong>" is called <strong>dynamic
+        style</strong>.
+    </p>
+    <p>This dynamic style runs each time before layout engine try to fill in the remaining space in the parent layout.
+    </p>
+    <pre><code class="typescript">
+      function requiredExtent(requiredSize: number) {
+        return (ctx: DynamicStyleContext): CssDeclarationBlock | undefined => {
+          if (!ctx.parentContext) {
+            return undefined;
+          }
+          if (ctx.parentContext.restExtent &gt;= requiredSize) {
+            return undefined; // enough block size is left!
+          }
+          // There is not enough block size left, so break the page.
+          return { "page-break-before": "always" };
+        };
+      }
+
+      const myStyleSheet = new CssStyleSheet({
+        ".require-60": {
+          "!dynamic": requiredExtent(60)
+        }
+      });      
+    </code></pre>
+
+    <h4>Other examples</h4>
+    <p>There are other plugins for nehan style, here is some examples.</p>
+    <ul>
+      <li><a href="https://github.com/tategakibunko/nehan-anchor">nehan-anchor</a> is a nehan plugin to create anchor
+        preview for anchor link.</li>
+      <li><a href="https://github.com/tategakibunko/nehan-highlight">nehan-highlight</a> is a nehan plugin to enable
+        code highlighting.</li>
+      <li><a href="https://github.com/tategakibunko/nehan-katex">nehan-katex</a> is a nehan plugin to display katex
+        math expressions.</li>
+      <li><a href="https://github.com/tategakibunko/nehan/blob/master/src/dynamic-style-utils.ts">DynamicStyleUtils</a>
+        is part of nehan layout engine, and it defines many dynamic layout examples.</li>
+      <li><a href="https://github.com/tategakibunko/nehan/blob/master/src/semantic-style.ts">SemanticStyle</a>
+        is part of nehan layout engine, and it defines many semantic markup classes.</li>
+    </ul>
+    <h4>About css propertie names in nehan-style</h4>
+    <p>Be aware that nehan is a <strong>logical</strong> layout engine, so some propertie names
+      of css are different from normal ones.</p>
+    <p>For example, <b>margin-left</b> is not available in nehan, instead, we use <strong>margin-start</strong> (for
+      writing-mode:"horizontal-tb") or <strong>margin-after</strong> (for writing-mode:"vertical-rl").</p>
+    <p>Besides, border, padding, width, height, and direction(like left/right/top/bottom) are different from normal
+      ones.</p>
+    <p>For more details, see <strong>"About logical size"</strong> and <strong>"About logical direction"</strong>
+      section of
+      <a href="https://github.com/tategakibunko/nehan">README</a> of nehan.
+    </p>
+
+    <h2 id="demo">Demo</h2>
+    <h3>horizontal-tb, theme = default</h3>
+    <nehan-player src="test-data/alice-en.html" writing-mode="horizontal-tb" width="responsive" height="500"
+      font-size="16" layout="1x2" theme="themes/default.css">
+      <span slot="title">Alice in Wonderland</span>
+    </nehan-player>
+
+    <h3>vertical-rl, theme = skyblue</h3>
+    <nehan-player src="test-data/aozora01.txt" writing-mode="vertical-rl" width="responsive" height="500" font-size="16"
+      layout="1x2" theme="themes/skyblue.css">
+      <span slot="title">杜子春（芥川龍之介）</span>
+    </nehan-player>
+
+    <h3>vertical-rl, theme = white</h3>
+    <nehan-player src="test-data/aozora02.txt" writing-mode="vertical-rl" width="responsive" height="500" font-size="16"
+      layout="2x1" theme="themes/white.css">
+      <span slot="title">雪解（永井荷風）</span>
+    </nehan-player>
+
+    <h3>display wikipedia, with toc</h3>
+    <nehan-player id="wikipedia" src="test-data/wikipedia-ja.html" writing-mode="horizontal-tb" width="responsive"
+      height="500" font-size="16" layout="1x2" theme="themes/default.css">
+      <span slot="title">涅槃 - wikipedia</span>
+    </nehan-player>
+    <div id="wikipedia-toc"></div>
+  </main>
+  <script src="./doc-demo.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/highlight.min.js"></script>
+  <script>
+    window.addEventListener("load", () => document.querySelectorAll("code").forEach(hljs.highlightBlock));
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+.player {
+  margin-bottom: 3em;
+}
+#screen-header {
+  font-size: 12px;
+}
+#title {
+  color: var(--title-color);
+}
+#sub-title {
+  color:var(--sub-title-color);
+}
+#screen {
+  background: var(--screen-bg);
+  border-style: var(--screen-border-style);
+  border-color: var(--screen-border-color);
+  border-top-left-radius: var(--screen-top-left-radius);
+  border-top-right-radius: var(--screen-top-right-radius);
+}
+#menu {
+  font-size: 14px;
+  color: var(--menu-font-color);
+  background: var(--menu-bg);
+  border-style: var(--menu-border-style);
+  border-color: var(--menu-border-color);
+  border-bottom-left-radius: var(--menu-bottom-left-radius);
+  border-bottom-right-radius: var(--menu-bottom-right-radius);
+}
+#footer {
+  font-size: 0.82em;
+}
+.nombre {
+  font-size: 0.92em;
+  flex-basis: 150px;
+}
+.vline {
+  border-left: 1px dotted var(--vline-color);
+}
+.hline {
+  border-bottom: 1px dotted var(--hline-color);
+}
+/*
+  Note that these customized css values are color-relative properties.
+  Never try to set sized value(like font-size, width, height etc...),
+  because it may have negative effect on nehan layout engine.
+*/
+.nehan-line a {
+  color:var(--nehan-link-color) !important;
+}
+.nehan-pre {
+  background: var(--nehan-pre-bg) !important;
+}
+.nehan-blockquote {
+  background: var(--nehan-blockquote-bg) !important;
+  border-color: var(--nehan-blockquote-border-color) !important;
+}
+.nehan-block.nehan-math {
+  background: var(--nehan-math-bg) !important;
+}

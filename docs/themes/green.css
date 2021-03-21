@@ -1,0 +1,25 @@
+@import "default-layout.css";
+.player {
+  --screen-bg: rgb(237 243 238);
+  --screen-border-color: #6cbd6d;
+  --menu-bg: #6cbd6d;
+  --menu-border-color: #6cbd6d;
+  --menu-font-color: white;
+  --title-color: rgba(80,80,80, 0.8);
+  --sub-title-color: rgba(80,80,80, 0.8);
+  --vline-color: #7a7a7a;
+  --hline-color: #7a7a7a;
+  --nehan-link-color: #d61111;
+  --nehan-pre-bg: white;
+  --nehan-blockquote-bg: white;
+  --nehan-blockquote-border-color: rgb(236, 134, 134);
+  --nehan-math-bg: white;
+
+  --screen-border-style: solid;
+  --screen-top-left-radius: 6px;
+  --screen-top-right-radius: 6px;
+
+  --menu-border-style: solid;
+  --menu-bottom-left-radius: 6px;
+  --menu-bottom-right-radius: 6px;
+}

@@ -1,0 +1,7 @@
+.DS_Store
+Makefile
+src
+example
+docs
+tsconfig.json
+*.code-workspace

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>advanced player demo</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width">
+  <!-- 
+    These css files are used in shadow DOM, 
+    so normally we should load them in shadow DOM.
+    But in current status, @font-face can't be imported into shadow DOM!
+    https://bugs.chromium.org/p/chromium/issues/detail?id=336876
+    So we declared these files here.
+  -->
+  <link rel="stylesheet" href="font.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.0/katex.min.css">
+  <style>
+    main {
+      margin: 2em;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <fieldset style="font-size:0.8em">
+      <legend>[ Keyboard Shortcut ]</legend>
+      <b>[ j ]</b> goto next page,
+      <b>[ k ]</b> goto prev page,
+      <b>[ left-key ]</b> goto left page,
+      <b>[ right-key ]</b> goto right page,
+    </fieldset>
+    <menu style="display: flex; gap: 10px;">
+      font: <select id="select-font-family">
+        <option value="">default</option>
+        <option value="ipa-mincho">IPA Mincho</option>
+      </select>
+      wiriting-mode: <select id="select-writing-mode">
+        <option value="horizontal-tb">horizontal-tb</option>
+        <option value="vertical-rl">vertical-rl</option>
+        <option value="vertical-lr">vertical-lr</option>
+      </select>
+      layout: <select id="select-layout">
+        <option value="1x1">1x1</option>
+        <option value="1x2">1x2</option>
+        <option value="2x1">2x1</option>
+        <option value="2x2">2x2</option>
+      </select>
+      text: <select id="select-src">
+        <option value="test-data/alice-en.html">novel1(en)</option>
+        <option value="test-data/aozora01.txt">novel1(jp)</option>
+        <option value="test-data/aozora02.txt">novel2(jp)</option>
+        <option value="test-data/wikipedia-en.html">wikipedia(en)</option>
+        <option value="test-data/wikipedia-ja.html">wikipedia(ja)</option>
+        <option value="test-data/nehan-demo-ja.html">nehan-demo(ja)</option>
+        <option value="test-data/nehan-demo-en.html">nehan-demo(en)</option>
+      </select>
+      theme: <select id="select-theme">
+        <option value="themes/default.css">default</option>
+        <option value="themes/skyblue.css">skyblue</option>
+        <option value="themes/white.css">white</option>
+        <option value="themes/berry.css">berry</option>
+        <option value="themes/green.css">green</option>
+        <option value="themes/strawberry.css">strawberry</option>
+      </select>
+      <button id="font-larger">font-size (+)</button>
+      <button id="font-smaller">font-size (-)</button>
+    </menu>
+    <nehan-player id="player" src="test-data/alice-en.html" writing-mode="horizontal-tb" width="responsive" height="550"
+      font-size="16" layout="1x2" theme="themes/default.css">
+    </nehan-player>
+    <script src="./advanced.js"></script>
+    <nav id="toc"></nav>
+  </main>
+</body>
+
+</html>

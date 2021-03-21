@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>responsive player demo</title>
+</head>
+
+<body style="margin:5em">
+  <main>
+    <!-- <h1>Responsive player demo</h1> -->
+    <nehan-player src="test-data/aozora01.txt" writing-mode="vertical-rl" width="responsive" height="500" font-size="16"
+      layout="1x2">
+      <span slot="title">杜子春（芥川龍之介）</span>
+    </nehan-player>
+  </main>
+
+  <script src="./nehan-player.js"></script>
+  <script>
+    let players = {};
+    NehanPlayer.initialize({
+      cssFiles: [
+        // "themes/default.css",
+        "themes/tmp.css",
+      ],
+      onPlayerReady(player) {
+        players[player.id] = player;
+      },
+      onFetchContent(src, content) {
+        if (src.endsWith(".txt")) {
+          return content.replace(/^\n+/, "").replace(/\n/g, "<br>");
+        }
+        return content;
+      },
+      onClickLeftPage(player) {
+        player.gotoLeftPage();
+      },
+      onClickRightPage(player) {
+        player.gotoRightPage();
+      }
+    });
+  </script>
+</body>
+
+</html>
