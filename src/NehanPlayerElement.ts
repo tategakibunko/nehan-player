@@ -10,7 +10,9 @@ let responsivePlayers: { [playerId: string]: PagedMediaPlayer } = {};
 
 let globalConfig: PagedMediaPlayerConfig = {
   cssFiles: [],
-  onFetchContent: (src: string, content: string) => content,
+  onFetchContent(src: string, content: string) { return content; },
+  onClickLeftPage(player: PagedMediaPlayer) { player.gotoLeftPage() },
+  onClickRightPage(player: PagedMediaPlayer) { player.gotoRightPage() },
 }
 
 function handleResize() {

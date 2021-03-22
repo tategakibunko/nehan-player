@@ -15,7 +15,9 @@ const MIN_UPDATE_TIME = 200;
 let responsivePlayers = {};
 let globalConfig = {
     cssFiles: [],
-    onFetchContent: (src, content) => content,
+    onFetchContent(src, content) { return content; },
+    onClickLeftPage(player) { player.gotoLeftPage(); },
+    onClickRightPage(player) { player.gotoRightPage(); },
 };
 function handleResize() {
     Object.values(responsivePlayers).forEach((player) => player.refresh(true));
