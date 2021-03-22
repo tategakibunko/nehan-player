@@ -143,6 +143,20 @@ NehanPlayer.initialize({
             }
           }
         },
+        "a.update-src": {
+          "color": "green",
+          "@create": (ctx: DomCallbackContext) => {
+            const href = ctx.box.env.element.getAttribute("href");
+            if (!href) {
+              return;
+            }
+            ctx.dom.onclick = (e) => {
+              e.preventDefault();
+              player.update({ src: href });
+              return false;
+            }
+          }
+        },
         "blockquote": {
           fontSize: "0.8em",
           padding: "0.6em",

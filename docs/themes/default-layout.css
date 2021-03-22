@@ -45,7 +45,8 @@
   because it may have negative effect on nehan layout engine.
 */
 .nehan-line a {
-  color:var(--nehan-link-color) !important;
+  /* color:var(--nehan-link-color) !important; */
+  color:var(--nehan-link-color);
 }
 .nehan-pre {
   background: var(--nehan-pre-bg) !important;
