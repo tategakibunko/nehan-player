@@ -1,3 +1,7 @@
+# Version 0.0.4 (2021/03/28)
+
+- Updated nehan(7.8.2 -> 7.8.3) to fix section detection bug.
+
 # Version 0.0.3 (2021/03/22)
 
 - Set default callback for onClickLeftPage, onClickRightPage.
