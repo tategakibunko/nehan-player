@@ -1,6 +1,6 @@
 {
   "name": "nehan-player",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "web component for paged media powered by nehan layout engine",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
