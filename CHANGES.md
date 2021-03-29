@@ -1,3 +1,7 @@
+# Version 0.0.5 (2021/03/29)
+
+- Updated nehan(to v7.8.4).
+
 # Version 0.0.4 (2021/03/28)
 
 - Updated nehan(7.8.2 -> 7.8.3) to fix section detection bug.
