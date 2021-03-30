@@ -134,7 +134,7 @@ export class NehanPagedMediaPlayer {
     createOutline(onClickTocItem) {
         return this.reader.createOutline(new LayoutOutlineEvaluator((section) => {
             const a = document.createElement('a');
-            a.appendChild(document.createTextNode(section.title));
+            a.innerHTML = section.header ? section.header.innerHTML : section.title;
             a.href = '#' + section.pageIndex;
             if (onClickTocItem) {
                 a.onclick = (e) => {
