@@ -164,7 +164,7 @@ export class NehanPagedMediaPlayer implements PagedMediaPlayer {
     return this.reader.createOutline(
       new LayoutOutlineEvaluator((section: LayoutSection) => {
         const a = document.createElement('a');
-        a.appendChild(document.createTextNode(section.title));
+        a.innerHTML = section.header ? section.header.innerHTML : section.title;
         a.href = '#' + section.pageIndex;
         if (onClickTocItem) {
           a.onclick = (e: Event) => {

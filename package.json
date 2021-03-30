@@ -30,7 +30,7 @@
   },
   "homepage": "https://github.com/tategakibunko/nehan-player#readme",
   "dependencies": {
-    "nehan": "^7.8.4"
+    "nehan": "^7.8.5"
   },
   "devDependencies": {
     "nehan-anchor": "^0.0.1",
