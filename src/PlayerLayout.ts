@@ -145,17 +145,19 @@ export function getPlayerHTML(): string {
         <div class="hline" id="hline-34"></div>
         <div class="page" id="page-4"></div>
       </div>
+      <div id="screen-footer">
+        <div class="nombre">
+          <span id="page-no"></span>
+          <span id="separator">/</span>
+          <span id="page-count"></span>
+        </div>
+      </div>
       <menu id="menu">
         <button class="pager" id="goto-left">
           <slot name="goto-left-label">
             ${svgLeft}
           </slot>
         </button>
-        <span class="nombre">
-          <span id="page-no"></span>
-          <span id="separator">/</span>
-          <span id="page-count"></span>
-        </span>
         <button class="pager" id="goto-right">
           <slot name="goto-right-label">
             ${svgRight}
@@ -197,6 +199,9 @@ export function getPlayerStyle(writingMode: WritingMode, playerSize: PhysicalSiz
     padding: ${layoutSettings.elementPaddingTop}px ${lrPadding}px ${bottomPadding}px;
     background: wheat;
     border-width: ${borderSize}px ${borderSize}px 0 ${borderSize}px;
+  }
+  #screen-footer {
+    padding: 10px;
   }
   #menu {
     display: flex;

@@ -17,6 +17,11 @@
   border-top-left-radius: var(--screen-top-left-radius);
   border-top-right-radius: var(--screen-top-right-radius);
 }
+#screen-footer {
+  font-size: smaller;
+  background: var(--screen-bg);
+  color: var(--sub-title-color);
+}
 #menu {
   font-size: 14px;
   color: var(--menu-font-color);
