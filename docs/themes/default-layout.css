@@ -10,15 +10,20 @@
 #sub-title {
   color:var(--sub-title-color);
 }
-#screen {
+.screen-wrap {
   background: var(--screen-bg);
   border-style: var(--screen-border-style);
   border-color: var(--screen-border-color);
   border-top-left-radius: var(--screen-top-left-radius);
   border-top-right-radius: var(--screen-top-right-radius);
 }
+/*
+#screen {
+}
+*/
 #screen-footer {
-  background: var(--screen-bg);
+  font-size: smaller;
+  /* background: var(--screen-bg); */
   color: var(--sub-title-color);
 }
 #menu {

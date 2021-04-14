@@ -101,24 +101,26 @@ export function getPageSize(layout, playerSize) {
 export function getPlayerHTML() {
     return `
     <div class="player">
-      <div id="screen-header">
-        <span id="title"><slot name="title"></slot></span>
-        <span id="sub-title"><slot name="sub-title"></slot></span>
-      </div>
-      <div id="screen">
-        <div class="page" id="page-1"></div>
-        <div class="hline" id="hline-12"></div>
-        <div class="page" id="page-2"></div>
-        <div class="vline"></div>
-        <div class="page" id="page-3"></div>
-        <div class="hline" id="hline-34"></div>
-        <div class="page" id="page-4"></div>
-      </div>
-      <div id="screen-footer">
-        <div class="nombre">
-          <span id="page-no"></span>
-          <span id="separator">/</span>
-          <span id="page-count"></span>
+      <div class="screen-wrap">
+        <div id="screen-header">
+          <span id="title"><slot name="title"></slot></span>
+          <span id="sub-title"><slot name="sub-title"></slot></span>
+        </div>
+        <div id="screen">
+          <div class="page" id="page-1"></div>
+          <div class="hline" id="hline-12"></div>
+          <div class="page" id="page-2"></div>
+          <div class="vline"></div>
+          <div class="page" id="page-3"></div>
+          <div class="hline" id="hline-34"></div>
+          <div class="page" id="page-4"></div>
+        </div>
+        <div id="screen-footer">
+          <div class="nombre">
+            <span id="page-no"></span>
+            <span id="separator">/</span>
+            <span id="page-count"></span>
+          </div>
         </div>
       </div>
       <menu id="menu">
@@ -147,6 +149,10 @@ export function getPlayerStyle(writingMode, playerSize, fontSize, lrPadding, bot
     margin-bottom: 2em;
     overflow: hidden;
   }
+  .screen-wrap {
+    background: wheat;
+    border-width: ${borderSize}px ${borderSize}px 0 ${borderSize}px;
+  }
   #screen-header {
     position: relative;
     font-size: 12px;
@@ -165,8 +171,6 @@ export function getPlayerStyle(writingMode, playerSize, fontSize, lrPadding, bot
     width: ${playerSize.width}px;
     height: ${playerSize.height}px;
     padding: ${layoutSettings.elementPaddingTop}px ${lrPadding}px ${bottomPadding}px;
-    background: wheat;
-    border-width: ${borderSize}px ${borderSize}px 0 ${borderSize}px;
   }
   #screen-footer {
     padding: 10px;
