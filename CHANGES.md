@@ -1,3 +1,8 @@
+# Version 0.1.0 (2021/04/14)
+
+- Updated nombre position(from menu to screen).
+- Added new option 'cssText' for Nehan.initialize.
+
 # Version 0.0.6 (2021/03/30)
 
 - Updated nehan(to v7.8.5).
