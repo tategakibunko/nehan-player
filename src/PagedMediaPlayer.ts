@@ -15,6 +15,7 @@ export interface PlayerSection {
 // initially set by NehanPlayer.initialize.
 export interface PagedMediaPlayerConfig {
   cssFiles?: string[];
+  cssText?: string;
   onCreateNehanStyles?: (player: PagedMediaPlayer) => CssStyleSheet[];
   onParsePage?: (player: PagedMediaPlayer, pageIndex: number) => void;
   onParseComplete?: (player: PagedMediaPlayer, pageCount: number, ellapsedTime: number) => void;
