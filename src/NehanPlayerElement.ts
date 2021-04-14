@@ -212,6 +212,14 @@ export class NehanPlayer extends HTMLElement {
       this.$shadow.appendChild(link);
     });
 
+    // append css text
+    const cssText = globalConfig.cssText || "";
+    if (cssText) {
+      const style = document.createElement("style");
+      style.innerHTML = cssText;
+      this.$shadow.appendChild(style);
+    }
+
     // append player shadow tree
     const template = document.createElement("template");
     template.innerHTML = getPlayerHTML();
