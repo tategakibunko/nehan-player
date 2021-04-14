@@ -122,6 +122,10 @@ NehanPlayer.initialize({
   cssFiles: [
     "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.0/katex.min.css",
   ],
+
+  // If you want to hide pager button, comment out this line.
+  // cssText: "#menu { display: none }",
+
   // You can create nehan-styles(internal page styling) here.
   // Note that the inside of each page is calculated by nehan layout engine,
   // so basically the style of each page must be customized by nehan-style.

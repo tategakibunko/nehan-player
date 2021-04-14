@@ -176,6 +176,12 @@ export class NehanPlayer extends HTMLElement {
                 const link = this.createCssLink(href, false);
                 this.$shadow.appendChild(link);
             });
+            const cssText = globalConfig.cssText || "";
+            if (cssText) {
+                const style = document.createElement("style");
+                style.innerHTML = cssText;
+                this.$shadow.appendChild(style);
+            }
             const template = document.createElement("template");
             template.innerHTML = getPlayerHTML();
             this.$shadow.appendChild(template.content.cloneNode(true));

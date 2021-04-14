@@ -189,6 +189,7 @@ export function getPlayerStyle(writingMode, playerSize, fontSize, lrPadding, bot
     border-width: 0 ${borderSize}px ${borderSize}px ${borderSize}px;
   }
   #slider {
+    margin-top: 10px;
     visibility: hidden; /* hide until onCompletePage is called. */
     width: ${playerSize.width}px;
     padding: 0 ${lrPadding}px;

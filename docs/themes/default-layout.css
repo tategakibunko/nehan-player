@@ -17,13 +17,8 @@
   border-top-left-radius: var(--screen-top-left-radius);
   border-top-right-radius: var(--screen-top-right-radius);
 }
-/*
-#screen {
-}
-*/
 #screen-footer {
   font-size: smaller;
-  /* background: var(--screen-bg); */
   color: var(--sub-title-color);
 }
 #menu {
