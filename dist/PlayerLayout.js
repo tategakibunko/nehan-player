@@ -173,7 +173,7 @@ export function getPlayerStyle(writingMode, playerSize, fontSize, lrPadding, bot
     padding: ${layoutSettings.elementPaddingTop}px ${lrPadding}px ${bottomPadding}px;
   }
   #screen-footer {
-    padding: 10px;
+    padding-bottom: ${layoutSettings.pageGapSize / 2}px;
   }
   #menu {
     display: flex;

@@ -205,7 +205,7 @@ export function getPlayerStyle(writingMode: WritingMode, playerSize: PhysicalSiz
     padding: ${layoutSettings.elementPaddingTop}px ${lrPadding}px ${bottomPadding}px;
   }
   #screen-footer {
-    padding: 10px;
+    padding-bottom: ${layoutSettings.pageGapSize / 2}px;
   }
   #menu {
     display: flex;
