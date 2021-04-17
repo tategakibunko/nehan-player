@@ -1,3 +1,7 @@
+# Version 0.1.1 (2021/04/17)
+
+- Updated style(footer padding).
+
 # Version 0.1.0 (2021/04/14)
 
 - Updated nombre position(from menu to screen).
