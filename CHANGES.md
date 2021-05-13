@@ -1,3 +1,7 @@
+# Version 0.1.2 (2021/05/13)
+
+- Updated nehan(to v7.8.9).
+
 # Version 0.1.1 (2021/04/17)
 
 - Updated style(footer padding).
