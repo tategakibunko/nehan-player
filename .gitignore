@@ -1,5 +1,7 @@
 .DS_Store
-example/*.js
+example/advanced.js
+example/doc-demo.js
+example/nehan-player.js
 example/fonts
 node_modules
 *.code-workspace
