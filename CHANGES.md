@@ -1,3 +1,7 @@
+# Version 0.1.3 (2021/05/27)
+
+- Updated nehan(to v7.8.11).
+
 # Version 0.1.2 (2021/05/13)
 
 - Updated nehan(to v7.8.9).
