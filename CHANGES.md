@@ -1,3 +1,8 @@
+# Version 0.1.4 (2021/06/07)
+
+- Updated nehan(to v7.8.13).
+- Updated nehan-highlight(to v0.1.2).
+
 # Version 0.1.3 (2021/05/27)
 
 - Updated nehan(to v7.8.11).
